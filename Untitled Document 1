@@ -1,0 +1,200 @@
+   private detailsStatus = new BehaviorSubject<number>(2);
+  private stepsStatus = new BehaviorSubject<number>(2);
+  private targetingStatus = new BehaviorSubject<number>(2);
+  private forwardFeedbackStatus = new BehaviorSubject<number>(2);
+  private sectionStatus = new BehaviorSubject<number>(0);
+
+  private emotion = new BehaviorSubject<number>(1);
+  private emailReq = new BehaviorSubject<number>(1);
+  private aditionalMessage = new BehaviorSubject<number>(1);
+  private thanksMessage = new BehaviorSubject<number>(1);
+
+ 
+  checkDetailsNullValues(name, description): Observable<any> {
+    if (name == "") {
+      this.detailsStatus.next(0);
+      return this.detailsStatus.asObservable();
+    }
+
+    this.detailsStatus.next(1);
+    return this.detailsStatus.asObservable();
+  }
+
+  checkStepsNullValues(question, emailReqActivation, additionalMsgActivation, thanksMsgActivation, emailReqMsg, additionalMsg, thanksMsg) {
+
+    if (question == "") {
+      this.stepsStatus.next(0);
+      this.emotion.next(0);
+      return this.stepsStatus.asObservable();
+    }
+
+    if (emailReqActivation == true && emailReqMsg == "") {
+      this.stepsStatus.next(0);
+      this.emailReq.next(0);
+      return this.stepsStatus.asObservable();
+    }
+
+    if (additionalMsgActivation == true && additionalMsg == "") {
+      this.stepsStatus.next(0);
+      this.aditionalMessage.next(0);
+      return this.stepsStatus.asObservable();
+    }
+
+    if (thanksMsgActivation == true && thanksMsg == "") {
+      this.stepsStatus.next(0);
+      this.thanksMessage.next(0);
+      return this.stepsStatus.asObservable();
+    }
+
+    this.stepsStatus.next(1);
+    return this.stepsStatus.asObservable();
+  }
+
+  checkTargetingNullValues(desktop, phone, tablet) {
+    if (desktop == false && phone == false && tablet == false) {
+      this.targetingStatus.next(0);
+      return this.targetingStatus.asObservable();
+    }
+
+    this.targetingStatus.next(1);
+    return this.targetingStatus.asObservable();
+  }
+
+  checkForwardFeedbackNullValues(email, responseViaEmail) {
+    if (email == true && responseViaEmail == "") {
+      this.forwardFeedbackStatus.next(0);
+      return this.forwardFeedbackStatus.asObservable();
+    }
+
+    this.forwardFeedbackStatus.next(1);
+    return this.forwardFeedbackStatus.asObservable();
+  }
+
+  getSectionStatus() {
+    if (this.detailsStatus.getValue() == 1 && this.stepsStatus.getValue() == 1 && this.targetingStatus.getValue() == 1 && this.forwardFeedbackStatus.getValue() == 1) {
+      this.sectionStatus.next(1);
+      return this.sectionStatus.asObservable();
+    }
+
+    this.sectionStatus.next(0);
+    return this.sectionStatus.asObservable();
+  }
+
+  getEmotion() {
+    return this.emotion.asObservable();
+  }
+
+  getEmailReq() {
+    return this.emailReq.asObservable();
+  }
+
+  getAditionalMessage() {
+    return this.aditionalMessage.asObservable();
+  }
+
+  getThanksMessage() {
+    return this.thanksMessage.asObservable();
+  }
+
+
+
+
+---------------------------------------------------------------------------
+  checkDetailsNullValues() {
+    this.detailsHeader = ": " + this.widgetProps.wgName
+    this.nameActive = false;
+    this.subscriptions.push(this.feedbackFacade.checkDetailsNullValues(this.widgetProps.wgName, this.widgetProps.wgDescription).subscribe(res => this.detailsStatus = res));
+    this.getSectionStatus();
+  }
+
+  checkStepsNullValues() {
+    this.stepsActive = false;
+    this.subscriptions.push(this.feedbackFacade
+      .checkStepsNullValues(this.widgetProps.wgQuestion, this.widgetProps.wgEmailReqActivation, this.widgetProps.wgAdditionalMsgActivation, this.widgetProps.wgThanksMsgActivation, this.widgetProps.wgEmailReqMsg, this.widgetProps.wgAdditionalMsg, this.widgetProps.wgThanksMsg)
+      .subscribe(res => this.stepsStatus = res));
+    this.getSectionStatus();
+  }
+
+  checkTargetingNullValues() {
+    this.targetingActive = false;
+    this.subscriptions.push(this.feedbackFacade.checkTargetingNullValues(this.widgetProps.wgDesktop, this.widgetProps.wgPhone, this.widgetProps.wgTablet).subscribe(res => this.targetingStatus = res));
+    this.getSectionStatus();
+  }
+
+  checkForwardFeedbackNullValues() {
+    this.forwardFeedbackActive = false;
+    this.subscriptions.push(this.feedbackFacade.checkForwardFeedbackNullValues(this.widgetProps.wgEmail, this.widgetProps.wgResponseViaEmail).subscribe(res => this.forwardFeedbackStatus = res));
+    this.getSectionStatus();
+  }
+
+  checkAppearanceNullValues() {
+    this.appearanceHeader = ":  " + this.selectedLanguage + ", accent color: " + this.widgetProps.wgAccentColor;
+    this.appearanceActive = false;
+    this.appearanceStatus = 1;
+    this.getSectionStatus();
+  }
+
+  getSectionStatus() {
+    this.subscriptions.push(this.feedbackFacade.getSectionStatus().subscribe(res => {
+      this.sectionStatus = res;
+    }));
+  }
+
+
+  scrollToElement(id) {
+    if (id == "Name") {
+      this.nameActive = true;
+      this.appearanceActive = false;
+      this.stepsActive = false;
+      this.targetingActive = false;
+      this.forwardFeedbackActive = false;
+    }
+    else if (id == "Appearance") {
+      this.nameActive = false;
+      this.appearanceActive = true;
+      this.stepsActive = false;
+      this.targetingActive = false;
+      this.forwardFeedbackActive = false;
+    }
+    else if (id == "Steps") {
+      this.nameActive = false;
+      this.appearanceActive = false;
+      this.stepsActive = true;
+      this.targetingActive = false;
+      this.forwardFeedbackActive = false;
+    }
+    else if (id == "Targeting") {
+      this.nameActive = false;
+      this.appearanceActive = false;
+      this.stepsActive = false;
+      this.targetingActive = true;
+      this.forwardFeedbackActive = false;
+    }
+    else if (id == "ForwardFeedback") {
+      this.nameActive = false;
+      this.appearanceActive = false;
+      this.stepsActive = false;
+      this.targetingActive = false;
+      this.forwardFeedbackActive = true;
+    }
+
+    var element = document.getElementById(id);
+    element.scrollIntoView(false);
+  }
+  
+  ----------------------------------------------------------------
+    nameActive: boolean = false;
+  appearanceActive: boolean = false;
+  stepsActive: boolean = false;
+  targetingActive: boolean = false;
+  forwardFeedbackActive: boolean = false;
+  reviewActive: boolean = false;
+
+  detailsStatus: number = 2;
+  stepsStatus: number = 2;
+  targetingStatus: number = 2;
+  forwardFeedbackStatus: number = 2;
+  appearanceStatus: number = 2;
+  sectionStatus: number = 0;
+
+
