@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # HRInterviewsScheduler
-=======
-# HRInterviews
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 

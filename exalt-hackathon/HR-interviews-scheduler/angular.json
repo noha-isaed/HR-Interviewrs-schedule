@@ -3,11 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-<<<<<<< HEAD
     "HR-interviews-scheduler": {
-=======
-    "HR-interviews": {
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,11 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-<<<<<<< HEAD
             "outputPath": "dist/HR-interviews-scheduler",
-=======
-            "outputPath": "dist/HR-interviews",
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -36,7 +28,6 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-<<<<<<< HEAD
               "src/assets",
               {
                 "glob": "**/*",
@@ -46,11 +37,6 @@
             ],
             "styles": [
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-=======
-              "src/assets"
-            ],
-            "styles": [
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
               "src/styles.scss"
             ],
             "scripts": []
@@ -92,17 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-<<<<<<< HEAD
               "browserTarget": "HR-interviews-scheduler:build:production"
             },
             "development": {
               "browserTarget": "HR-interviews-scheduler:build:development"
-=======
-              "browserTarget": "HR-interviews:build:production"
-            },
-            "development": {
-              "browserTarget": "HR-interviews:build:development"
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
             }
           },
           "defaultConfiguration": "development"
@@ -110,11 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-<<<<<<< HEAD
             "browserTarget": "HR-interviews-scheduler:build"
-=======
-            "browserTarget": "HR-interviews:build"
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
           }
         },
         "test": {
@@ -130,10 +105,7 @@
               "src/assets"
             ],
             "styles": [
-<<<<<<< HEAD
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-=======
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
               "src/styles.scss"
             ],
             "scripts": []
@@ -142,9 +114,5 @@
       }
     }
   },
-<<<<<<< HEAD
   "defaultProject": "HR-interviews-scheduler"
-=======
-  "defaultProject": "HR-interviews"
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
 }

@@ -25,11 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-<<<<<<< HEAD
       dir: require('path').join(__dirname, './coverage/HR-interviews-scheduler'),
-=======
-      dir: require('path').join(__dirname, './coverage/HR-interviews'),
->>>>>>> 3c2b9d30c3dda0235427825f5bc7ca6c2614cd8d
       subdir: '.',
       reporters: [
         { type: 'html' },
